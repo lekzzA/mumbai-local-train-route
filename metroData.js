@@ -63,316 +63,325 @@ const metroData = {    stations: {
             x: 400, 
             y: 420, 
             lines: ['western'] 
-        },
-        'MRU': { 
+        },        'MRU': { 
             id: 'MRU', 
             name: 'Matunga Road', 
             x: 400, 
-            y: 390, 
+            y: 400, 
             lines: ['western'] 
-        },        'MM': { 
+        },
+        'MM': { 
             id: 'MM', 
             name: 'Mahim Jn', 
             x: 400, 
-            y: 360, 
+            y: 380, 
             lines: ['western', 'orange'] 
-        },'BA': { 
+        },
+        'BA': { 
             id: 'BA', 
             name: 'Bandra Jn', 
             x: 400, 
-            y: 330, 
+            y: 360, 
             lines: ['western', 'orange'] 
-        },'KHAR': { 
+        },
+        'KHAR': { 
             id: 'KHAR', 
             name: 'Khar Road', 
             x: 400, 
-            y: 300, 
+            y: 340, 
             lines: ['western', 'orange'] 
-        },'STC': { 
+        },
+        'STC': { 
             id: 'STC', 
             name: 'Santa Cruz', 
             x: 400, 
-            y: 270, 
+            y: 320, 
             lines: ['western', 'orange'] 
-        },'VLP': { 
+        },
+        'VLP': { 
             id: 'VLP', 
             name: 'Ville Parle', 
             x: 400, 
-            y: 240, 
+            y: 300, 
             lines: ['western', 'orange'] 
-        },'ADH': { 
+        },
+        'ADH': { 
             id: 'ADH', 
             name: 'Andheri', 
             x: 400, 
-            y: 210, 
+            y: 280, 
             lines: ['western', 'orange'] 
-        },
-        'JOS': { 
+        },        'JOS': { 
             id: 'JOS', 
             name: 'Jogeshwari', 
             x: 400, 
-            y: 180, 
+            y: 260, 
             lines: ['western'] 
         },
         'RMAR': { 
             id: 'RMAR', 
             name: 'Ram Mandir', 
             x: 400, 
-            y: 150, 
+            y: 240, 
             lines: ['western'] 
         },
         'GMN': { 
             id: 'GMN', 
             name: 'Goregaon', 
             x: 400, 
-            y: 120, 
+            y: 220, 
             lines: ['western'] 
         },
         'MDD': { 
             id: 'MDD', 
             name: 'Malad', 
             x: 400, 
-            y: 90, 
+            y: 200, 
             lines: ['western'] 
         },
         'KILE': { 
             id: 'KILE', 
             name: 'Kandivli', 
             x: 400, 
-            y: 60, 
+            y: 180, 
             lines: ['western'] 
         },
         'BVI': { 
             id: 'BVI', 
             name: 'Borivali', 
             x: 400, 
-            y: 30, 
+            y: 160, 
             lines: ['western'] 
         },
         'DIC': { 
             id: 'DIC', 
             name: 'Dahisar', 
             x: 400, 
-            y: 0, 
+            y: 140, 
             lines: ['western'] 
         },
         'MIRA': { 
             id: 'MIRA', 
             name: 'Mira Road', 
             x: 400, 
-            y: -30, 
+            y: 120, 
             lines: ['western'] 
         },
         'BYR': { 
             id: 'BYR', 
             name: 'Bhayandar', 
             x: 400, 
-            y: -60, 
+            y: 100, 
             lines: ['western'] 
         },
         'NIG': { 
             id: 'NIG', 
             name: 'Naigaon', 
             x: 400, 
-            y: -90, 
+            y: 80, 
             lines: ['western'] 
         },
         'BSR': { 
             id: 'BSR', 
             name: 'Vasai Road', 
             x: 400, 
-            y: -120, 
+            y: 60, 
             lines: ['western'] 
         },
         'NSP': { 
             id: 'NSP', 
             name: 'Nalla Sopara', 
             x: 400, 
-            y: -150, 
+            y: 40, 
             lines: ['western'] 
-        },        'VR': { 
+        },
+        'VR': { 
             id: 'VR', 
             name: 'Virar', 
             x: 400, 
-            y: -180, 
+            y: 20, 
             lines: ['western'] 
-        },
-
-        // Orange Line - Andheri to CSMT (shares some stations with Western Line)
+        },        // Orange Line - Andheri to CSMT (shares some stations with Western Line)
         'KCE': { 
             id: 'KCE', 
             name: 'Kings Circle', 
             x: 500, 
-            y: 360, 
+            y: 400, 
             lines: ['orange'] 
-        },        'VDLR': { 
+        },
+        'VDLR': { 
             id: 'VDLR', 
             name: 'Vadala Road', 
             x: 500, 
-            y: 390, 
+            y: 420, 
             lines: ['orange', 'yellow'] 
-        },'SVE': { 
+        },
+        'SVE': { 
             id: 'SVE', 
             name: 'Sewri', 
             x: 500, 
-            y: 420, 
+            y: 440, 
             lines: ['orange', 'yellow'] 
-        },'CTGN': { 
+        },
+        'CTGN': { 
             id: 'CTGN', 
             name: 'Cotton Green', 
             x: 500, 
-            y: 450, 
+            y: 460, 
             lines: ['orange', 'yellow'] 
-        },'RRD': { 
+        },
+        'RRD': { 
             id: 'RRD', 
             name: 'Reay Road', 
             x: 500, 
             y: 480, 
             lines: ['orange', 'yellow'] 
-        },'DKRD': { 
+        },
+        'DKRD': { 
             id: 'DKRD', 
             name: 'Dockyard Road', 
             x: 500, 
-            y: 510, 
+            y: 500, 
             lines: ['orange', 'yellow'] 
-        },'SNRD': { 
+        },
+        'SNRD': { 
             id: 'SNRD', 
             name: 'Sandhurst Road', 
             x: 500, 
-            y: 540, 
+            y: 520, 
             lines: ['orange', 'yellow'] 
-        },'MSD': { 
+        },
+        'MSD': { 
             id: 'MSD', 
             name: 'Masjid', 
             x: 500, 
-            y: 560, 
+            y: 540, 
             lines: ['orange', 'yellow'] 
-        },'CSMT': { 
+        },
+        'CSMT': { 
             id: 'CSMT', 
             name: 'C Shivaji Maharaj T', 
             x: 500, 
-            y: 580, 
+            y: 560, 
             lines: ['orange', 'yellow'] 
-        },
-
-        // Yellow Line - CSMT to Panvel (Harbour Line) - branches from VDLR
+        },        // Yellow Line - CSMT to Panvel (Harbour Line) - branches from VDLR
         'GTBN': { 
             id: 'GTBN', 
             name: 'Guru Teghbahadurnagar', 
             x: 600, 
-            y: 390, 
+            y: 400, 
             lines: ['yellow'] 
         },
         'CHF': { 
             id: 'CHF', 
             name: 'Chunabhatti', 
             x: 600, 
-            y: 360, 
+            y: 380, 
             lines: ['yellow'] 
         },
         'CLA': { 
             id: 'CLA', 
             name: 'Kurla Jn', 
             x: 600, 
-            y: 330, 
+            y: 360, 
             lines: ['yellow'] 
         },
         'TKNG': { 
             id: 'TKNG', 
             name: 'Tilak Nagar', 
             x: 600, 
-            y: 300, 
+            y: 340, 
             lines: ['yellow'] 
         },
         'CMBR': { 
             id: 'CMBR', 
             name: 'Chembur', 
             x: 600, 
-            y: 270, 
+            y: 320, 
             lines: ['yellow'] 
         },
         'GV': { 
             id: 'GV', 
             name: 'Govandi', 
             x: 600, 
-            y: 240, 
+            y: 300, 
             lines: ['yellow'] 
         },
         'MNKD': { 
             id: 'MNKD', 
             name: 'Mankhurd', 
             x: 600, 
-            y: 210, 
+            y: 280, 
             lines: ['yellow'] 
         },
         'VSH': { 
             id: 'VSH', 
             name: 'Vashi', 
             x: 600, 
-            y: 180, 
+            y: 260, 
             lines: ['yellow'] 
         },
         'SNCR': { 
             id: 'SNCR', 
             name: 'Sanpada', 
             x: 600, 
-            y: 150, 
+            y: 240, 
             lines: ['yellow'] 
         },
         'JNJ': { 
             id: 'JNJ', 
             name: 'Juinagar', 
             x: 600, 
-            y: 120, 
+            y: 220, 
             lines: ['yellow'] 
         },
         'NEU': { 
             id: 'NEU', 
             name: 'Nerul', 
             x: 600, 
-            y: 90, 
+            y: 200, 
             lines: ['yellow'] 
         },
         'SWDV': { 
             id: 'SWDV', 
             name: 'Sea Wood Darave', 
             x: 600, 
-            y: 60, 
+            y: 180, 
             lines: ['yellow'] 
         },
         'BEPR': { 
             id: 'BEPR', 
             name: 'Belapur C B D', 
             x: 600, 
-            y: 30, 
+            y: 160, 
             lines: ['yellow'] 
         },
         'KHAG': { 
             id: 'KHAG', 
             name: 'Kharghar', 
             x: 600, 
-            y: 0, 
+            y: 140, 
             lines: ['yellow'] 
         },
         'MANR': { 
             id: 'MANR', 
             name: 'Mansarovar', 
             x: 600, 
-            y: -30, 
+            y: 120, 
             lines: ['yellow'] 
         },
         'KNDS': { 
             id: 'KNDS', 
             name: 'Khandeshwar', 
             x: 600, 
-            y: -60, 
+            y: 100, 
             lines: ['yellow'] 
         },
         'PNVL': { 
             id: 'PNVL', 
             name: 'Panvel', 
             x: 600, 
-            y: -90, 
+            y: 80, 
             lines: ['yellow'] 
         }
     },    lines: {

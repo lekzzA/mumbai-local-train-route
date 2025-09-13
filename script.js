@@ -12,11 +12,18 @@ class MetroApp {
     
     initializeApp() {
         this.populateStationSelectors();
-        this.drawMetroMap();
+        this.draw        // Add final segment
+        if (currentLine) {
+            const lineInfo = metroData.lines[currentLine];
+            const startStation = metroData.stations[segmentStart];
+            const endStation = metroData.stations[path[path.length - 1]];
+            const destination = this.getLineDestination(currentLine, segmentStart, path[path.length - 1]);
+            
+            instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> towards <strong>${destination}</strong> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
+        });
         this.setupEventListeners();
     }
-    
-    populateStationSelectors() {
+      populateStationSelectors() {
         const startSelect = document.getElementById('start-station');
         const endSelect = document.getElementById('end-station');
         
@@ -25,8 +32,10 @@ class MetroApp {
             .sort((a, b) => a.name.localeCompare(b.name));
         
         stationsList.forEach(station => {
-            const option1 = new Option(station.name, station.id);
-            const option2 = new Option(station.name, station.id);
+            // Display format: "Station Name (CODE)" for dropdowns
+            const displayName = `${station.name} (${station.id})`;
+            const option1 = new Option(displayName, station.id);
+            const option2 = new Option(displayName, station.id);
             startSelect.add(option1);
             endSelect.add(option2);
         });
@@ -76,22 +85,69 @@ class MetroApp {
             svg.appendChild(path);
         });
     }
-    
-    drawStations(svg) {
+      drawStations(svg) {
+        // Line offsets must match those used in drawMetroLines
+        const lineOffsets = {
+            western: -3,
+            orange: 3,
+            yellow: 9
+        };
+        
         Object.values(metroData.stations).forEach(station => {
             const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
             group.setAttribute('class', 'station');
             group.setAttribute('data-station-id', station.id);
             
-            // Station circle
+            // Calculate station position based on which line to center on
+            // Priority: western > orange > yellow (first line in station.lines array)
+            let stationX = station.x;
+            let primaryLine = station.lines[0]; // Use first line as primary
+            
+            // Apply the same offset as the line to center the station on it
+            if (lineOffsets[primaryLine] !== undefined) {
+                stationX = station.x + lineOffsets[primaryLine];
+            }
+              // Station circle - positioned on the line
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', station.x);
+            circle.setAttribute('cx', stationX);
             circle.setAttribute('cy', station.y);
-            circle.setAttribute('r', 8);
-              // Station label
+            circle.setAttribute('r', 5);// Station label with smart positioning based on line colors
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', station.x + 15);
-            text.setAttribute('y', station.y + 5);
+              // Determine text position based on which lines serve this station
+            let textX, textAnchor = 'start';
+            const textY = station.y + 5;
+            
+            // Priority-based positioning for better visual layout
+            // Use the adjusted stationX position as reference
+              if (station.lines.includes('yellow') && !station.lines.includes('western')) {
+                // Pure yellow line stations: text on the right
+                textX = stationX + 12;
+                textAnchor = 'start';
+            } else if (station.lines.includes('western') && !station.lines.includes('yellow')) {
+                // Pure western line stations: text on the left, clear of the line
+                textX = stationX - 20;  // Reduced distance since station is smaller
+                textAnchor = 'end';
+            } else if (station.lines.includes('yellow') && station.lines.includes('western')) {
+                // Stations serving both yellow and western: use right positioning to avoid yellow line
+                textX = stationX + 12;
+                textAnchor = 'start';
+            } else if (station.lines.includes('western')) {
+                // Western line stations (with orange): text on the left to avoid overlap
+                textX = stationX - 20;  // Reduced distance since station is smaller
+                textAnchor = 'end';
+            } else if (station.lines.includes('orange')) {
+                // Orange line stations: text on the right (but less than yellow)
+                textX = stationX + 10;
+                textAnchor = 'start';
+            } else {
+                // Default positioning
+                textX = stationX + 12;
+                textAnchor = 'start';
+            }
+            
+            text.setAttribute('x', textX);
+            text.setAttribute('y', textY);
+            text.setAttribute('text-anchor', textAnchor);
             text.textContent = station.name;
             
             group.appendChild(circle);
@@ -335,10 +391,9 @@ class MetroApp {
         
         // Update viewBox to zoom to route
         svg.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
-        
-        // Store original viewBox for reset
+          // Store original viewBox for reset
         if (!svg.dataset.originalViewBox) {
-            svg.dataset.originalViewBox = '0 -200 800 800';
+            svg.dataset.originalViewBox = '0 -50 800 650';
         }
     }
       clearRouteHighlight() {
@@ -368,8 +423,7 @@ class MetroApp {
         }
     }
     
-    
-    generateRouteInstructions(path) {
+      generateRouteInstructions(path) {
         if (path.length <= 1) return '';
         
         const instructions = [];
@@ -390,8 +444,9 @@ class MetroApp {
                 const lineInfo = metroData.lines[currentLine];
                 const startStation = metroData.stations[segmentStart];
                 const endStation = metroData.stations[path[i]];
+                const destination = this.getLineDestination(currentLine, segmentStart, path[i]);
                 
-                instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
+                instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> towards <strong>${destination}</strong> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
                 
                 // Start new segment
                 segmentStart = path[i];
@@ -405,11 +460,63 @@ class MetroApp {
             const lineInfo = metroData.lines[currentLine];
             const startStation = metroData.stations[segmentStart];
             const endStation = metroData.stations[path[path.length - 1]];
+            const destination = this.getLineDestination(currentLine, segmentStart, path[path.length - 1]);
             
-            instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
+            instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> towards <strong>${destination}</strong> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
         }
         
         return instructions.join('<br>');
+    }    getLineDestination(lineId, startStationId, endStationId) {
+        const line = metroData.lines[lineId];
+        const stations = line.stations;
+        const startIndex = stations.indexOf(startStationId);
+        const endIndex = stations.indexOf(endStationId);
+        
+        if (startIndex === -1 || endIndex === -1) return 'Unknown';
+        
+        // Define terminus stations for each line
+        const termini = {
+            western: {
+                north: 'Virar',      // Last station in array (higher index)
+                south: 'Churchgate'  // First station in array (lower index)
+            },
+            orange: {
+                north: 'Andheri',           // First station in array (lower index)
+                south: 'C Shivaji Maharaj T' // Last station in array (higher index)
+            },
+            yellow: {
+                north: 'Panvel',            // Last station in array (higher index)
+                south: 'C Shivaji Maharaj T' // First station in array (lower index)
+            }
+        };
+        
+        // Get the terminus names for this line
+        const lineTermini = termini[lineId];
+        if (!lineTermini) {
+            // Fallback to first/last station
+            const firstStation = metroData.stations[stations[0]];
+            const lastStation = metroData.stations[stations[stations.length - 1]];
+            return endIndex > startIndex ? lastStation.name : firstStation.name;
+        }
+        
+        // Determine direction based on movement along the line
+        if (lineId === 'western') {
+            // Western line: Churchgate (index 0) to Virar (index 28)
+            // If endIndex > startIndex, going towards Virar (north)
+            // If endIndex < startIndex, going towards Churchgate (south)
+            return endIndex > startIndex ? lineTermini.north : lineTermini.south;
+        } else if (lineId === 'orange') {
+            // Orange line: Andheri (index 0) to CSMT (index 14)
+            // If endIndex > startIndex, going towards CSMT (south)
+            // If endIndex < startIndex, going towards Andheri (north)
+            return endIndex > startIndex ? lineTermini.south : lineTermini.north;        } else if (lineId === 'yellow') {
+            // Yellow line: CSMT (index 0) to Panvel (index 24)
+            // If endIndex > startIndex, going towards Panvel (north)
+            // If endIndex < startIndex, going towards CSMT (south)
+            return endIndex > startIndex ? lineTermini.north : lineTermini.south;
+        }
+        
+        return 'Unknown';
     }
     
     clearSelection() {

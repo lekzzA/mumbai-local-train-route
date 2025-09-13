@@ -169,10 +169,13 @@ button {
 
 .station text {
     fill: #2c3e50;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    text-anchor: start;
     pointer-events: none;
+    paint-order: stroke fill;
+    stroke: white;
+    stroke-width: 3;
+    stroke-linejoin: round;
 }
 
 /* Line styles */
