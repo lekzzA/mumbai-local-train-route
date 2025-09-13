@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Suburban Railway Route Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">        <header>
+            <h1>Mumbai Suburban Railway Route Finder</h1>
+            <p>Find the best routes between stations on Central, Western & Harbour lines</p>
+        </header>
+        
+        <main>
+            <div class="controls">
+                <div class="station-selectors">
+                    <div class="selector-group">
+                        <label for="start-station">From:</label>
+                        <select id="start-station">
+                            <option value="">Select start station</option>
+                        </select>
+                    </div>
+                    
+                    <div class="selector-group">
+                        <label for="end-station">To:</label>
+                        <select id="end-station">
+                            <option value="">Select destination</option>
+                        </select>
+                    </div>
+                    
+                    <button id="find-route" disabled>Find Routes</button>
+                    <button id="clear-route">Clear</button>
+                </div>
+            </div>
+              <div class="routes-panel">
+                <h3>Route Options</h3>
+                <div id="routes-list">
+                    <p class="no-routes">Select stations to see route options</p>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <svg id="metro-map" viewBox="0 -200 800 800">
+                    <!-- Metro map will be drawn here -->
+                </svg>
+            </div>
+        </main>
+    </div>
+    
+    <script src="metroData.js"></script>
+    <script src="pathfinding.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

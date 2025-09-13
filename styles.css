@@ -1,0 +1,295 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Controls section */
+.controls {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.station-selectors {
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.selector-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.selector-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#find-route {
+    background: #667eea;
+    color: white;
+}
+
+#find-route:enabled:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#find-route:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#clear-route {
+    background: #e74c3c;
+    color: white;
+}
+
+#clear-route:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* Map container */
+.map-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+#metro-map {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #e1e5e9;
+    border-radius: 10px;
+}
+
+/* Station styles */
+.station {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.station circle {
+    fill: #e0e0e0;
+    stroke: #bdbdbd;
+    stroke-width: 2;
+}
+
+.station:hover circle {
+    fill: #c0c0c0;
+    stroke: #999999;
+    transform: scale(1.2);
+}
+
+.station.selected circle {
+    fill: #f39c12;
+    stroke: #e67e22;
+    stroke-width: 3;
+}
+
+.station.start circle {
+    fill: #27ae60;
+    stroke: #229954;
+}
+
+.station.end circle {
+    fill: #e74c3c;
+    stroke: #c0392b;
+}
+
+.station text {
+    fill: #2c3e50;
+    font-size: 12px;
+    font-weight: 600;
+    text-anchor: start;
+    pointer-events: none;
+}
+
+/* Line styles */
+.metro-line {
+    stroke-width: 4;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.line-central { stroke: #FF6B35; }
+.line-western { stroke: #4A90E2; }
+.line-harbour { stroke: #50C878; }
+.line-orange { stroke: #FF6B35; }
+.line-yellow { stroke: #FDD835; }
+
+.route-highlight {
+    opacity: 0.8;
+}
+
+.route-highlight:hover {
+    opacity: 1;
+}
+
+/* Routes panel */
+.routes-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.routes-panel h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+
+.route-option {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.route-option:hover {
+    border-color: #667eea;
+    background: #f0f3ff;
+}
+
+.route-option.active {
+    border-color: #667eea;
+    background: #e8f0fe;
+}
+
+.route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.route-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.route-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.route-instructions {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.line-name {
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.route-path {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.4;
+}
+
+.no-routes {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .station-selectors {
+        flex-direction: column;
+    }
+    
+    .selector-group {
+        min-width: 100%;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    #metro-map {
+        height: 400px;
+    }
+}
