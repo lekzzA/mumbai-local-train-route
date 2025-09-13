@@ -9,18 +9,9 @@ class MetroApp {
         
         this.initializeApp();
     }
-    
-    initializeApp() {
+      initializeApp() {
         this.populateStationSelectors();
-        this.draw        // Add final segment
-        if (currentLine) {
-            const lineInfo = metroData.lines[currentLine];
-            const startStation = metroData.stations[segmentStart];
-            const endStation = metroData.stations[path[path.length - 1]];
-            const destination = this.getLineDestination(currentLine, segmentStart, path[path.length - 1]);
-            
-            instructions.push(`Take <span class="line-name" style="color: ${lineInfo.color}">${lineInfo.name}</span> towards <strong>${destination}</strong> from <strong>${startStation.name}</strong> to <strong>${endStation.name}</strong>`);
-        });
+        this.drawMetroMap();
         this.setupEventListeners();
     }
       populateStationSelectors() {
